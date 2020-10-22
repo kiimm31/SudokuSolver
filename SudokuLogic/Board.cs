@@ -1,0 +1,64 @@
+﻿using SudokuLogic.Constrains;
+using SudokuLogic.Constrains.Interface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace SudokuLogic
+{
+    public class Board
+    {
+        private readonly IEnumerable<IConstrain> _constrains;
+
+        public List<Cell> Cells { get; set; }
+
+        public Board(IEnumerable<IConstrain> constrains)
+        {
+            //initialise cells
+
+            Cells = new List<Cell>();
+
+            for (int row = 1; row <= 9; row++)
+            {
+                for (int col = 1; col <= 9; col++)
+                {
+                    Cells.Add(new Cell(row, col));
+                }
+            }
+            _constrains = constrains;
+        }
+
+        public void SetFixValue(int row, int col, int value)
+        {
+            if (Cells?.Any(x => x.Row == row && x.Column == col) ?? false)
+            {
+                Cell myCell = Cells.FirstOrDefault(x => x.Column == col && x.Row == row);
+
+                myCell.SetValue(value);
+            }
+        }
+
+        public void AttemptSolve()
+        {
+            while (Cells.Any(x => x.Value == 0)) // there are still unsolved Cells
+            {
+                StepIteration();
+            }
+        }
+
+        public void StepIteration()
+        {
+            foreach (Cell targetCell in Cells)
+            {
+                if (targetCell.Value == 0) // this cell is unsolved
+                {
+                    foreach (IConstrain constrain in _constrains)
+                    {
+                        constrain.DoWork(targetCell, this);
+                    }
+                }
+            }
+        }
+    }
+}
