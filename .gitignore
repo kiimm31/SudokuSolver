@@ -6,3 +6,6 @@
 /.vs
 /SudokuLogic/.vs/SudokuLogic
 /SudokuLogic/obj
+/SudokuInterface/bin/Debug/netcoreapp3.1
+/SudokuInterface/obj
+/SudokuLogic/bin/Debug/netstandard2.0
