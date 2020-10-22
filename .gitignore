@@ -3,3 +3,6 @@
 ################################################################################
 
 /.vs/SudokuLogic/v16
+/.vs
+/SudokuLogic/.vs/SudokuLogic
+/SudokuLogic/obj
