@@ -1,4 +1,4 @@
-﻿using SudokuLogic.Constrains.Interface;
+﻿using SudokuLogic.Constraints.Interface;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,11 +6,11 @@ namespace SudokuLogic
 {
     public class Board
     {
-        private readonly IEnumerable<IConstrain> _constrains;
+        private readonly IEnumerable<IConstraint> _constrains;
 
         public IList<Cell> Cells { get; set; }
 
-        public Board(IEnumerable<IConstrain> constrains)
+        public Board(IEnumerable<IConstraint> constrains)
         {
             //initialise cells
 
@@ -50,7 +50,7 @@ namespace SudokuLogic
             {
                 if (targetCell.Value == 0) // this cell is unsolved
                 {
-                    foreach (IConstrain constrain in _constrains)
+                    foreach (IConstraint constrain in _constrains)
                     {
                         constrain.DoWork(targetCell, this);
                     }
@@ -60,7 +60,7 @@ namespace SudokuLogic
 
         public bool Check()
         {
-            foreach (IConstrain constrain in _constrains)
+            foreach (IConstraint constrain in _constrains)
             {
                 if (!constrain.Check(this))
                 {

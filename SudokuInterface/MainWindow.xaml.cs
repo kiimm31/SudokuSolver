@@ -26,7 +26,7 @@ namespace SudokuInterface
 
             IEnumerable<IStrategy> strategies = StrategyFactory.CreateAllStrategies();
 
-            IEnumerable<IConstrain> constrains = ConstrainFactory.CreateNormalSudokuContrains(strategies);
+            IEnumerable<IConstraint> constrains = ConstraintFactory.CreateNormalSudokuContraints(strategies);
 
             _board = new Board(constrains);
 
