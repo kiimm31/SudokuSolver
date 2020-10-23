@@ -33,11 +33,15 @@
 
         <!--<TextBox Grid.Row="1" Grid.Column="1" Name="cellr2c2" KeyDown="TxtCell_KeyDown" TextChanged="TxtCell_TextChanged" BorderThickness="5"></TextBox>-->
         
-        <Button x:Name="btnSolveSudoku" Click="btnSolveSudoku_Click" Content="Solve" Grid.Row="10" Grid.Column="6" Grid.ColumnSpan="3" >
+        <Button x:Name="btnSolveSudoku" Click="btnSolveSudoku_Click" Content="Solve" Grid.Row="10" Grid.Column="7" Grid.ColumnSpan="2" >
 
         </Button>
 
-        <Button x:Name="btnNextStep" Click="btnNextStep_Click" Content="Next Step" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" >
+        <Button x:Name="btnCheck" Click="btnCheck_Click" Content="Check" Grid.Row="10" Grid.Column="3" Grid.ColumnSpan="3" >
+
+        </Button>
+
+        <Button x:Name="btnNextStep" Click="btnNextStep_Click" Content="Next Step" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" >
 
         </Button>
     </Grid>

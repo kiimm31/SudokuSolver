@@ -1,6 +1,8 @@
 ﻿using SudokuLogic;
 using SudokuLogic.Constrains;
 using SudokuLogic.Constrains.Interface;
+using SudokuLogic.Factory;
+using SudokuLogic.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +34,9 @@ namespace SudokuInterface
         {
             InitializeComponent();
 
-            IEnumerable<IConstrain> constrains = new List<IConstrain>() { new BoxConstrain(), new RowConstrain(), new ColumnConstrain() };
+            IEnumerable<IStrategy> strategies = StrategyFactory.CreateAllStrategies();
+
+            IEnumerable<IConstrain> constrains = ConstrainFactory.CreateNormalSudokuContrains(strategies);
 
             _board = new Board(constrains);
 
@@ -138,6 +142,18 @@ namespace SudokuInterface
                 {
                     txtCell.Text = cell.Value.ToString();
                 }
+            }
+        }
+
+        private void btnCheck_Click(object sender, RoutedEventArgs e)
+        {
+            if (_board.Check())
+            {
+                MessageBox.Show("Looks good to me!");
+            }
+            else
+            {
+                MessageBox.Show("Something looks off...");
             }
         }
     }
