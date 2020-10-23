@@ -11,6 +11,11 @@ namespace SudokuLogic.Constrains
         {
         }
 
+        public bool Check(Board board)
+        {
+            throw new NotImplementedException();
+        }
+
         public void DoWork(Cell currentCell, Board board)
         {
             throw new NotImplementedException();
