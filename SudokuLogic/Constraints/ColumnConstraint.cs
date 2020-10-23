@@ -1,15 +1,15 @@
-﻿using SudokuLogic.Constrains.Interface;
+﻿using SudokuLogic.Constraints.Interface;
 using SudokuLogic.Interface;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SudokuLogic.Constrains
+namespace SudokuLogic.Constraints
 {
-    public class RowConstrain : IConstrain
+    public class ColumnConstraint : IConstraint
     {
         private readonly IEnumerable<IStrategy> _strategies;
 
-        public RowConstrain(IEnumerable<IStrategy> strategies)
+        public ColumnConstraint(IEnumerable<IStrategy> strategies)
         {
             _strategies = strategies;
         }
@@ -21,35 +21,37 @@ namespace SudokuLogic.Constrains
                 1,2,3,4,5,6,7,8,9
             };
 
-            for (int row = 1; row <= 9; row++)
+            for (int col = 1; col <= 9; col++)
             {
-                IEnumerable<Cell> rowCells = board.Cells.Where(x => x.Row == row);
+                IEnumerable<Cell> colCells = board.Cells.Where(x => x.Column == col);
 
-                IEnumerable<int> myRowValues = rowCells?.Select(x => x.Value);
+                IEnumerable<int> myColValues = colCells?.Select(x => x.Value);
 
-                if (new HashSet<int>(myRowValues).Equals(new HashSet<int>(possibleValues)))
+                if (new HashSet<int>(myColValues).Equals(new HashSet<int>(possibleValues)))
                 {
                     return false;
                 }
             }
 
             return true;
+
         }
 
         public void DoWork(Cell currentCell, Board board)
         {
             if (currentCell.Value == 0)
             {
-                IEnumerable<Cell> cellsInRow = board.Cells.Where(x => x.Row == currentCell.Row && x != currentCell);
+                IEnumerable<Cell> cellsInColumn = board.Cells.Where(x => x.Column == currentCell.Column && x != currentCell);
 
-                if (cellsInRow.Any() && _strategies.Any())
+                if (cellsInColumn.Any() && _strategies.Any())
                 {
                     foreach (IStrategy strategy in _strategies)
                     {
-                        strategy.DoWork(currentCell, cellsInRow);
+                        strategy.DoWork(currentCell, cellsInColumn);
                     }
                 }
             }
+
         }
     }
 }

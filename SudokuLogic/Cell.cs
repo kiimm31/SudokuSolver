@@ -11,38 +11,43 @@ namespace SudokuLogic
         private readonly int _row;
         private readonly int _column;
 
-        public int Value { get; set; }
-        public ICollection<int> PossibleValues { get; set; }
+        public int Value => _value;
+
+        private int _value { get; set; } = 0;
+        public IReadOnlyCollection<int> PossibleValues
+        {
+            get
+            {
+                if (_value > 0 && _possibleValues.Count() == 1)
+                {
+                    _possibleValues.RemoveAll(x => x != _value);
+                }
+                return _possibleValues;
+            }
+        }
+        private List<int> _possibleValues { get; set; } = new List<int>()
+                                                          {
+                                                              1,2,3,4,5,6,7,8,9
+                                                          };
 
         public Cell(int row, int column)
         {
-            PossibleValues = new List<int>()
-            {
-                1,2,3,4,5,6,7,8,9
-            };
-            Value = 0;
             _row = row;
             _column = column;
         }
 
-        public Cell(int fixedValue)
-        {
-            Value = fixedValue;
-        }
-
         public void SetValue(int value)
         {
-            this.Value = value;
-            PossibleValues = new List<int>() { value };
+            _value = value;
         }
 
         public void RemovePossibleValue(int value)
         {
-            PossibleValues.Remove(value);
+            _possibleValues.Remove(value);
 
-            if (PossibleValues.Count() == 1)
+            if (_possibleValues.Count() == 1)
             {
-                SetValue(PossibleValues.FirstOrDefault());
+                SetValue(_possibleValues.FirstOrDefault());
             }
         }
     }
