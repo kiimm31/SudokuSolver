@@ -1,16 +1,16 @@
-﻿using SudokuLogic.Constrains.Interface;
+﻿using SudokuLogic.Constraints.Interface;
 using SudokuLogic.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SudokuLogic.Constrains
+namespace SudokuLogic.Constraints
 {
-    public class KingsMoveConstrain : IConstrain
+    public class KingsMoveConstraint : IConstraint
     {
         private readonly IEnumerable<IStrategy> _strategies;
 
-        public KingsMoveConstrain(IEnumerable<IStrategy> strategies)
+        public KingsMoveConstraint(IEnumerable<IStrategy> strategies)
         {
             _strategies = strategies;
         }

@@ -1,6 +1,6 @@
-﻿namespace SudokuLogic.Constrains.Interface
+﻿namespace SudokuLogic.Constraints.Interface
 {
-    public interface IConstrain
+    public interface IConstraint
     {
         void DoWork(Cell currentCell, Board board);
 

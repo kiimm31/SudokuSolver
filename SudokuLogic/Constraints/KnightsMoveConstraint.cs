@@ -1,13 +1,13 @@
-﻿using SudokuLogic.Constrains.Interface;
+﻿using SudokuLogic.Constraints.Interface;
 using SudokuLogic.Interface;
 using System;
 using System.Collections.Generic;
 
-namespace SudokuLogic.Constrains
+namespace SudokuLogic.Constraints
 {
-    public class KnightsMoveConstrain : IConstrain
+    public class KnightsMoveConstraint : IConstraint
     {
-        public KnightsMoveConstrain(IEnumerable<IStrategy> strategies)
+        public KnightsMoveConstraint(IEnumerable<IStrategy> strategies)
         {
         }
 
