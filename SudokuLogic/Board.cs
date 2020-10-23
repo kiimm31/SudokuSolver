@@ -60,5 +60,18 @@ namespace SudokuLogic
                 }
             }
         }
+
+        public bool Check()
+        {
+            foreach (IConstrain constrain in _constrains)
+            {
+                if (!constrain.Check(this))
+                {
+                    return false;// something wrong
+                }
+            }
+            return true;
+        }
+
     }
 }
