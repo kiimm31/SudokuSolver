@@ -8,7 +8,7 @@ namespace SudokuLogic
     {
         private readonly IEnumerable<IConstrain> _constrains;
 
-        public List<Cell> Cells { get; set; }
+        public IList<Cell> Cells { get; set; }
 
         public Board(IEnumerable<IConstrain> constrains)
         {
@@ -69,6 +69,5 @@ namespace SudokuLogic
             }
             return true;
         }
-
     }
 }
