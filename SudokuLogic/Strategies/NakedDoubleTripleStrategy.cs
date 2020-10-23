@@ -1,6 +1,7 @@
 ﻿using SudokuLogic.Interface;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace SudokuLogic.Strategies
 {
@@ -8,17 +9,21 @@ namespace SudokuLogic.Strategies
     {
         public void DoWork(Cell currentCell, IEnumerable<Cell> otherCells)
         {
+            if (currentCell.Row == 7 && currentCell.Column == 3)
+            {
+
+            }
+
             // is there a pair? if triple, must have 3 to clear all others
             ICollection<Cell> potentialCandiates = new List<Cell>();
 
-            if (otherCells.Any(x => x.PossibleValues == currentCell.PossibleValues))
+            foreach (Cell cell in otherCells)
             {
-                foreach (Cell cell in otherCells)
+                if (cell.PossibleValues.All(x => currentCell.PossibleValues.Contains(x))) 
                 {
-                    if (cell.PossibleValues == currentCell) // another cell with the same possiblity only
-                    {
-                        potentialCandiates.Add(cell);
-                    }
+                    // current cell should have the largest possible values
+                    // any other cell should be subsets.
+                    potentialCandiates.Add(cell);
                 }
             }
 
@@ -38,7 +43,7 @@ namespace SudokuLogic.Strategies
 
         private bool IsLockedPair(Cell currentCell, ICollection<Cell> potentialCandiates)
         {
-            return potentialCandiates.Count() == currentCell.PossibleValues.Count();
+            return potentialCandiates.Count() + 1 == currentCell.PossibleValues.Count();
         }
     }
 }
