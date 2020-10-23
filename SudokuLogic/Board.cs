@@ -1,9 +1,6 @@
-﻿using SudokuLogic.Constrains;
-using SudokuLogic.Constrains.Interface;
-using System;
+﻿using SudokuLogic.Constrains.Interface;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SudokuLogic
 {
