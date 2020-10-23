@@ -27,7 +27,7 @@ namespace SudokuLogic.Constrains
 
                 IEnumerable<int> myRowValues = rowCells?.Select(x => x.Value);
 
-                if (myRowValues != possibleValues)
+                if (new HashSet<int>(myRowValues).Equals(new HashSet<int>(possibleValues)))
                 {
                     return false;
                 }

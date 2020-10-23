@@ -15,6 +15,8 @@ namespace SudokuLogic.Factory
                     return new EliminationStrategy();
                 case Type type when type == typeof(NakedSingleStrategy):
                     return new NakedSingleStrategy();
+                case Type type when type == typeof(NakedDoubleTripleStrategy):
+                    return new NakedDoubleTripleStrategy();
 
                 default:
                     return new EliminationStrategy();
@@ -26,7 +28,8 @@ namespace SudokuLogic.Factory
             return new List<IStrategy>()
             {
                 CreateStrategy<EliminationStrategy>(),
-                CreateStrategy<NakedSingleStrategy>()
+                CreateStrategy<NakedSingleStrategy>(),
+                CreateStrategy<NakedDoubleTripleStrategy>()
             };
         }
     }
