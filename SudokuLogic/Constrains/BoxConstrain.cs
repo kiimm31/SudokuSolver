@@ -1,36 +1,54 @@
 ﻿using SudokuLogic.Constrains.Interface;
+using SudokuLogic.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SudokuLogic.Constrains
 {
     public class BoxConstrain : IConstrain
     {
+        private readonly IEnumerable<IStrategy> _strategies;
+
+        public BoxConstrain(IEnumerable<IStrategy> strategies)
+        {
+            _strategies = strategies;
+        }
+
+        public bool Check(Board board)
+        {
+            IEnumerable<int> possibleValues = new List<int>()
+            {
+                1,2,3,4,5,6,7,8,9
+            };
+
+            for (int box = 1; box <= 9; box++)
+            {
+                IEnumerable<Cell> boxCells = board.Cells.Where(x => GetCurrentBoxNumber(x) == box);
+
+                IEnumerable<int> myBoxValues = boxCells?.Select(x => x.Value);
+
+                if (myBoxValues != possibleValues)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         public void DoWork(Cell currentCell, Board board)
         {
             if (currentCell.Value == 0)
             {
-                IEnumerable<Cell> cellsInBox = board.Cells.Where(x => GetCurrentBoxNumber(currentCell) == GetCurrentBoxNumber(x));
+                IEnumerable<Cell> cellsInBox = board.Cells.Where(x => GetCurrentBoxNumber(currentCell) == GetCurrentBoxNumber(x) && x != currentCell);
 
                 if (cellsInBox.Any())
                 {
-                    // remove all confirmed possibles
-                    foreach (Cell cell in cellsInBox.Where(x => x.Value > 0))
+                    foreach (IStrategy strategy in _strategies)
                     {
-                        currentCell.RemovePossibleValue(cell.Value);
-                    }
-
-                    //check any distinct possible values
-
-                    List<int> otherCellsPossibles = new List<int>();
-                    cellsInBox.Where(x => x != currentCell).Select(x => x.PossibleValues).ToList().ForEach(z => otherCellsPossibles.AddRange(z));
-
-                    IEnumerable<int> myCellPossible = currentCell.PossibleValues.Except(otherCellsPossibles.Distinct());
-
-                    if (myCellPossible.Count() == 1)
-                    {
-                        currentCell.SetValue(myCellPossible.FirstOrDefault());
+                        strategy.DoWork(currentCell, cellsInBox);
                     }
                 }
             }
