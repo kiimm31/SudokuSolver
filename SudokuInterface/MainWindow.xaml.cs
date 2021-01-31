@@ -1,5 +1,5 @@
 ﻿using SudokuLogic;
-using SudokuLogic.Constrains.Interface;
+using SudokuLogic.Constraints.Interface;
 using SudokuLogic.Factory;
 using SudokuLogic.Interface;
 using System.Collections.Generic;
