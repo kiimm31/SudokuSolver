@@ -9,7 +9,7 @@ namespace SudokuSolver.Core.Services;
 public class ClassicSudokuSolverService(Grid grid) : AbstractSudokuSolverService
 {
     public override Grid MyGrid { get; set; } = grid;
-    private const int maxUnchangedIterations = 3;
+    private const int MaxUnchangedIterations = 3;
 
     public override List<Constrain> Constrains { get; init; } =
     [
@@ -43,7 +43,7 @@ public class ClassicSudokuSolverService(Grid grid) : AbstractSudokuSolverService
             if (MyGrid.Equals(previousGrid))
             {
                 unchangedIterations++;
-                if (unchangedIterations >= maxUnchangedIterations)
+                if (unchangedIterations >= MaxUnchangedIterations)
                 {
                     break; // Exit the loop if no changes for 3 iterations
                 }
