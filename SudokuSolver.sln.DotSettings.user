@@ -1,0 +1,17 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ALateBoundTestFramework_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2025_002E1_003Fresharper_002Dhost_003FSourcesCache_003Ff9878f643c2ecf1b4ce73234de56c9754a451c835620eae85ca8babbcb5889c4_003FLateBoundTestFramework_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d35f4750_002Dbfb3_002D4dc0_002Db1e2_002Df049dca654b8/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GivenRowHasAllButOneValue_WhenTrySolve_ThenReferenceCellShouldSetToLeftOverValue" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD::net9.0::SudokuSolver.UnitTest.Tests.GivenRowHasAllButOneValue_WhenTrySolve_ThenReferenceCellShouldSetToLeftOverValue&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD::net9.0::SudokuSolver.UnitTest.ColumnConstrainTest.GivenCellsInColumnHasAllButOneValue&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD::net9.0::SudokuSolver.UnitTest.BoxConstrainTest.GivenBox1HasAllButOneValue&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD::net9.0::SudokuSolver.UnitTest.BoxConstrainTest.GetBox_ShouldReturnCorrectCellsForTopLeftBox&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD::net9.0::SudokuSolver.UnitTest.BoxConstrainTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD::net9.0::SudokuSolver.UnitTest.RowConstrainTest.GridGetRow&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD::net9.0::SudokuSolver.UnitTest.ColumnConstrainTest.GridGetRow&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD::net9.0::SudokuSolver.UnitTest.ClassicSolverTest.Easiest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD::net9.0::SudokuSolver.UnitTest.ClassicSolverTest.PrintGrid&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD::net9.0::SudokuSolver.UnitTest.ClassicSolverTest.Unsolvable&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD::net9.0::SudokuSolver.UnitTest.ClassicSolverTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

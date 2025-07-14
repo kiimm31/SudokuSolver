@@ -1,0 +1,219 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\kim31\\Code\\SudokuSolver\\SudokuSolver.UnitTest\\SudokuSolver.UnitTest.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\kim31\\Code\\SudokuSolver\\SudokuSolver.Core\\SudokuSolver.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\kim31\\Code\\SudokuSolver\\SudokuSolver.Core\\SudokuSolver.Core.csproj",
+        "projectName": "SudokuSolver.Core",
+        "projectPath": "C:\\Users\\kim31\\Code\\SudokuSolver\\SudokuSolver.Core\\SudokuSolver.Core.csproj",
+        "packagesPath": "C:\\Users\\kim31\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kim31\\Code\\SudokuSolver\\SudokuSolver.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\kim31\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "C:\\Users\\kim31\\Code\\SudokuSolver\\SudokuSolver.Domain\\SudokuSolver.Domain.csproj": {
+                "projectPath": "C:\\Users\\kim31\\Code\\SudokuSolver\\SudokuSolver.Domain\\SudokuSolver.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100-rc.1.24452.12/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\kim31\\Code\\SudokuSolver\\SudokuSolver.Domain\\SudokuSolver.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\kim31\\Code\\SudokuSolver\\SudokuSolver.Domain\\SudokuSolver.Domain.csproj",
+        "projectName": "SudokuSolver.Domain",
+        "projectPath": "C:\\Users\\kim31\\Code\\SudokuSolver\\SudokuSolver.Domain\\SudokuSolver.Domain.csproj",
+        "packagesPath": "C:\\Users\\kim31\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kim31\\Code\\SudokuSolver\\SudokuSolver.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\kim31\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100-rc.1.24452.12/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\kim31\\Code\\SudokuSolver\\SudokuSolver.UnitTest\\SudokuSolver.UnitTest.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\kim31\\Code\\SudokuSolver\\SudokuSolver.UnitTest\\SudokuSolver.UnitTest.csproj",
+        "projectName": "SudokuSolver.UnitTest",
+        "projectPath": "C:\\Users\\kim31\\Code\\SudokuSolver\\SudokuSolver.UnitTest\\SudokuSolver.UnitTest.csproj",
+        "packagesPath": "C:\\Users\\kim31\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kim31\\Code\\SudokuSolver\\SudokuSolver.UnitTest\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\kim31\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "C:\\Users\\kim31\\Code\\SudokuSolver\\SudokuSolver.Core\\SudokuSolver.Core.csproj": {
+                "projectPath": "C:\\Users\\kim31\\Code\\SudokuSolver\\SudokuSolver.Core\\SudokuSolver.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "FluentAssertions": {
+              "target": "Package",
+              "version": "[8.5.0, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.10.0, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "NUnit.Analyzers": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[6.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100-rc.1.24452.12/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
