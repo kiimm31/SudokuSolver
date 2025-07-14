@@ -1,11 +1,1 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
-/.vs/SudokuLogic/v16
-/.vs
-/SudokuLogic/.vs/SudokuLogic
-/SudokuLogic/obj
-/SudokuInterface/bin/Debug/netcoreapp3.1
-/SudokuInterface/obj
-/SudokuLogic/bin/Debug/netstandard2.0
+﻿/.idea/
