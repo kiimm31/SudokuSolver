@@ -6,24 +6,46 @@ public class Cell
     public int Column { get; init; }
     public int Value { get; set; }
 
-    private List<int> PossibleValues { get; set; } = [1,2,3,4,5,6,7,8,9];
-    
+    private List<int> PossibleValues { get; set; } = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+    public void SetValue(int value)
+    {
+        if (value < 0 || value > 9)
+            throw new ArgumentOutOfRangeException(nameof(value), "Value must be between 0 and 9.");
+        Value = value;
+        PossibleValues.Clear();
+        PossibleValues.Add(value);
+    }
+
     public void EliminatePossibleValue(int value)
     {
         PossibleValues.Remove(value);
-        
+
         if (IsConfirmed)
         {
-            Value = PossibleValues[0];
+            SetValue(PossibleValues[0]);
         }
     }
-    
+
     public List<int> GetPossibleValues()
     {
         return PossibleValues;
     }
-    
+
     public bool IsSolved => Value != 0;
-    
+
     public bool IsConfirmed => PossibleValues.Count == 1;
+
+    public int GetBoxIndex()
+    {
+        // Determine which box the cell belongs to (convert to 0-based for calculation)
+        var boxRow = (Row - 1) / 3;
+        var boxColumn = (Column - 1) / 3;
+
+        // Calculate the starting row and column for the box (convert back to 1-based)
+        var startRow = boxRow * 3;
+        var startColumn = boxColumn + 1;
+
+        return startRow + startColumn;
+    }
 }

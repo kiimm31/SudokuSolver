@@ -8,10 +8,10 @@ public class Grid(List<Cell> cells)
     // Represents a Sudoku grid, which is a 9x9 matrix of cells.
     private List<Cell> Cells { get; set; } = cells;
 
-    public Cell GetCell(int row, int column)
+    public Cell? GetCell(int row, int column)
     {
         // Retrieves a cell from the grid based on its row and column indices.
-        return Cells.Single(c => c.Row == row && c.Column == column);
+        return Cells.SingleOrDefault(c => c.Row == row && c.Column == column);
     }
 
     public void SetCell(int row, int column, int value)
@@ -56,7 +56,11 @@ public class Grid(List<Cell> cells)
         {
             for (var c = startColumn; c < startColumn + 3; c++)
             {
-                cells.Add(GetCell(r, c));
+                var cell = GetCell(r, c);
+                if (cell is not null)
+                {
+                    cells.Add(cell);
+                }
             }
         }
 
@@ -115,25 +119,29 @@ public class Grid(List<Cell> cells)
     {
         var referenceGrid = (Grid)obj!;
 
-        var me = this.GetAllCells().OrderBy(x => x.Row).ThenBy(x => x.Column).ToList();
+        var me = GetAllCells().ToList();
 
         foreach (var myCell in me)
         {
-            var referenceCell = referenceGrid.GetCell(myCell.Row, myCell.Column);
+            var referenceCell = referenceGrid.GetCell(myCell.Row, myCell.Column)!;
 
+            if (myCell.IsConfirmed && referenceCell.IsConfirmed)
+            {
+                continue;
+            }
+            
             // Check if the cell values are equal
             if (myCell.Value != referenceCell.Value)
             {
                 return false;
             }
-            
+
             // Check if the possible values are equal
-            if (!myCell.GetPossibleValues().SequenceEqual(referenceCell.GetPossibleValues()))
+            if (myCell.GetPossibleValues().Count != referenceCell.GetPossibleValues().Count)
             {
                 return false;
             }
         }
-
 
         return true;
     }

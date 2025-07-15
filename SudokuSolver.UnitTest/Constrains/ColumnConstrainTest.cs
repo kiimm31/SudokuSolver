@@ -4,7 +4,7 @@ using SudokuSolver.Domain;
 using SudokuSolver.Domain.Models;
 using SudokuSolver.UnitTest.Base;
 
-namespace SudokuSolver.UnitTest;
+namespace SudokuSolver.UnitTest.Constrains;
 
 public class ColumnConstrainTest : BaseTest
 {

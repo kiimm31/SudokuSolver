@@ -1,6 +1,7 @@
 ﻿using SudokuSolver.Core.Constrains;
 using SudokuSolver.Core.Helpers;
 using SudokuSolver.Core.Interface;
+using SudokuSolver.Core.Strategies;
 using SudokuSolver.Domain;
 using SudokuSolver.Domain.Models;
 
@@ -9,13 +10,19 @@ namespace SudokuSolver.Core.Services;
 public class ClassicSudokuSolverService(Grid grid) : AbstractSudokuSolverService
 {
     public override Grid MyGrid { get; set; } = grid;
-    private const int MaxUnchangedIterations = 3;
-
     public override List<Constrain> Constrains { get; init; } =
     [
         new RowConstrain(),
         new ColumnConstrain(),
         new BoxConstrain()
+    ];
+    
+    private int MaxUnchangedIterations { get; init; } = 5;
+    
+    public override List<Strategy> Strategies { get; init; } =
+    [
+        new NakedSubsetsStrategy(),
+        new HiddenSinglesStrategy(),
     ];
 
     public override Grid Solve()
@@ -38,19 +45,24 @@ public class ClassicSudokuSolverService(Grid grid) : AbstractSudokuSolverService
                     MyGrid = constrain.TrySolve(MyGrid, referenceCell.Row, referenceCell.Column);
                 }
             }
+            
+            foreach (var strategy in Strategies)
+            {
+                MyGrid = strategy.Solve(MyGrid);
+            }
 
-            // Check if the grid has changed
-            if (MyGrid.Equals(previousGrid))
+            if (Equals(MyGrid.GetAllUnsolvedCells().Count(), previousGrid.GetAllUnsolvedCells().Count()))
             {
                 unchangedIterations++;
-                if (unchangedIterations >= MaxUnchangedIterations)
-                {
-                    break; // Exit the loop if no changes for 3 iterations
-                }
             }
             else
             {
-                unchangedIterations = 0; // Reset counter if grid changed
+                unchangedIterations = 0;
+            }
+            
+            if (unchangedIterations >= MaxUnchangedIterations)
+            {
+                break;
             }
         }
 

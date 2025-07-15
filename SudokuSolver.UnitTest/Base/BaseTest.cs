@@ -29,12 +29,28 @@ public class BaseTest
                 { 
                     Row = row + 1,      // Convert to 1-based indexing
                     Column = col + 1,   // Convert to 1-based indexing
-                    Value = gridRaw[row, col]
                 };
+                
+                cell.SetValue(gridRaw[row, col]);
                 cells.Add(cell);
             }
         }
 
         return new Grid(cells);
+    }
+    
+    private static readonly int[] _allPossibleValues = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    protected Cell GenerateCellWithPossibleValues(int row, int column, int[] possibleValues = null)
+    {
+        var myCell = new Cell { Row = row, Column = column};
+
+        if (!(possibleValues?.Any() ?? false)) 
+            return myCell;
+        foreach (var candidate in _allPossibleValues.Where(x => !possibleValues.Contains(x)))
+        {
+            myCell.EliminatePossibleValue(candidate);
+        }
+
+        return myCell;
     }
 }

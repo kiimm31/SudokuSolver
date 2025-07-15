@@ -3,7 +3,7 @@ using SudokuSolver.Core.Constrains;
 using SudokuSolver.Domain;
 using SudokuSolver.UnitTest.Base;
 
-namespace SudokuSolver.UnitTest;
+namespace SudokuSolver.UnitTest.Constrains;
 
 public class KnightConstrainTest : BaseTest
 {
