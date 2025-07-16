@@ -30,8 +30,18 @@ public class BaseTest
                     Row = row + 1,      // Convert to 1-based indexing
                     Column = col + 1,   // Convert to 1-based indexing
                 };
-                
-                cell.SetValue(gridRaw[row, col]);
+
+                if (gridRaw[row, col] == 0)
+                {
+                    // If the cell is empty, we can leave it as is
+                    // or initialize it with possible values if needed
+                    // cell.PossibleValues = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+                }
+                else
+                {
+                    cell.SetValue(gridRaw[row, col]);
+                }
+               
                 cells.Add(cell);
             }
         }
@@ -51,6 +61,13 @@ public class BaseTest
             myCell.EliminatePossibleValue(candidate);
         }
 
+        return myCell;
+    }
+    
+    protected Cell GenerateCellWithValue(int row, int column, int value)
+    {
+        var myCell = new Cell { Row = row, Column = column };
+        myCell.SetValue(value);
         return myCell;
     }
 }

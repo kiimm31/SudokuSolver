@@ -12,6 +12,7 @@
     &lt;TestId&gt;NUnit3x::8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD::net9.0::SudokuSolver.UnitTest.ClassicSolverTest.GivenStuck_ShouldBreak&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD::net9.0::SudokuSolver.UnitTest.Strategies.HiddenSinglesTest.HiddenSingles&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD::net9.0::SudokuSolver.UnitTest.Strategies.NakedSubsetsStrategyTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD::net9.0::SudokuSolver.UnitTest.Strategies.PointingStrategyTest.PointingStrategyApplicationTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	

@@ -16,12 +16,8 @@ public abstract class Constrain
         // get interested cells based on the type of constraint
         var interestedCells = GetInterestedCells(grid, referenceRow, referenceColumn);
         
-        //clone possible values
-        var possibleValues = new List<int>();
-        possibleValues.AddRange(PossibleValues);
-        
-        // eliminate possible values based on the reference cell
-        EliminateReferenceCellsPossibleValues(interestedCells, referenceCell, possibleValues);
+     // eliminate possible values based on the reference cell
+        EliminateReferenceCellsPossibleValues(interestedCells, referenceCell);
         
         // return the modified grid
         return grid;
@@ -29,16 +25,15 @@ public abstract class Constrain
 
     private Cell GetReferenceCell(Grid grid, int referenceRow, int referenceColumn)
     {
-        return grid.GetCell(referenceRow, referenceColumn);
+        return grid.GetCell(referenceRow, referenceColumn)!;
     }
 
     protected abstract List<Cell> GetInterestedCells(Grid grid, int referenceRow, int referenceColumn);
     
-    protected virtual void EliminateReferenceCellsPossibleValues(List<Cell> interestedCells, Cell referenceCell, List<int> possibleValues)
+    protected virtual void EliminateReferenceCellsPossibleValues(List<Cell> interestedCells, Cell referenceCell)
     {
         foreach (var cell in interestedCells.Where(cell => cell.IsSolved && !cell.Equals(referenceCell)))
         {
-            possibleValues.Remove(cell.Value);
             referenceCell.EliminatePossibleValue(cell.Value);
         }
     }

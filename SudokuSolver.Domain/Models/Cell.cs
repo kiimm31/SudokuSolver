@@ -10,8 +10,8 @@ public class Cell
 
     public void SetValue(int value)
     {
-        if (value < 0 || value > 9)
-            throw new ArgumentOutOfRangeException(nameof(value), "Value must be between 0 and 9.");
+        if (value <= 0 || value > 9)
+            throw new ArgumentOutOfRangeException(nameof(value), "Value must be between 1 and 9.");
         Value = value;
         PossibleValues.Clear();
         PossibleValues.Add(value);

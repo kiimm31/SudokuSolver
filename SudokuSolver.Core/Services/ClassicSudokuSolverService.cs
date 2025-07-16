@@ -23,6 +23,7 @@ public class ClassicSudokuSolverService(Grid grid) : AbstractSudokuSolverService
     [
         new NakedSubsetsStrategy(),
         new HiddenSinglesStrategy(),
+        new PointingStrategy(),
     ];
 
     public override Grid Solve()

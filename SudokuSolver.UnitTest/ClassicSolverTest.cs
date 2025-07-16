@@ -31,6 +31,8 @@ public class ClassicSolverTest : BaseTest
         // Test that the solver can solve this easy puzzle
         var result = solverService.Solve();
 
+        Console.Write(result.PrintGrid());
+
         result.IsSolved().Should().BeTrue();
     }
 
