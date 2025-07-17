@@ -20,7 +20,7 @@ public class CellTest : BaseTest
     [TestCase(9, 5, ExpectedResult = 8)]
     public int BoxIndex(int row, int column)
     {
-        var cell = GenerateCellWithPossibleValues(row, column);
+        var cell = GenerateCellWithPossibleValues(row, column, []);
 
         return cell.GetBoxIndex();
     }

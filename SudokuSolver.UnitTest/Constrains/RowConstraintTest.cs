@@ -35,9 +35,9 @@ public class RowConstraintTest : BaseTest
         
         var result = _rowConstraint.TrySolve(grid, 1,9);
         
-        result.GetCell(1, 9).Value.Should().Be(9);
-        result.GetCell(1, 9).IsSolved.Should().BeTrue();
-        result.GetCell(1, 9).IsConfirmed.Should().BeTrue();
+        result.GetCell(1, 9)!.Value.Should().Be(9);
+        result.GetCell(1, 9)!.IsSolved.Should().BeTrue();
+        result.GetCell(1, 9)!.IsConfirmed.Should().BeTrue();
     }
 
     [TestCase(1)]

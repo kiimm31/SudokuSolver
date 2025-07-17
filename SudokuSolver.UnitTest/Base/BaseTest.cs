@@ -50,7 +50,7 @@ public class BaseTest
     }
     
     private static readonly int[] _allPossibleValues = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    protected Cell GenerateCellWithPossibleValues(int row, int column, int[] possibleValues = null)
+    protected Cell GenerateCellWithPossibleValues(int row, int column, int[] possibleValues)
     {
         var myCell = new Cell { Row = row, Column = column};
 

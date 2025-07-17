@@ -34,9 +34,9 @@ public class ColumnConstraintTest : BaseTest
         });
         
         var result = _columnConstraint.TrySolve(grid, 9, 1);
-        result.GetCell(9, 1).Value.Should().Be(9);
-        result.GetCell(9, 1).IsSolved.Should().BeTrue();
-        result.GetCell(9, 1).IsConfirmed.Should().BeTrue();
+        result.GetCell(9, 1)!.Value.Should().Be(9);
+        result.GetCell(9, 1)!.IsSolved.Should().BeTrue();
+        result.GetCell(9, 1)!.IsConfirmed.Should().BeTrue();
     }
     
     [TestCase(1)]
