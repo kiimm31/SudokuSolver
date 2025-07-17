@@ -27,13 +27,17 @@ public class Grid(List<Cell> cells)
     public List<Cell> GetRow(int row)
     {
         // Retrieves all cells in a specific row.
-        return Cells.Where(c => c.Row == row).ToList();
+        return Cells.Where(c => c.Row == row)
+            .OrderBy(x => x.Column)
+            .ToList();
     }
 
     public List<Cell> GetColumn(int column)
     {
         // Retrieves all cells in a specific column.
-        return Cells.Where(c => c.Column == column).ToList();
+        return Cells.Where(c => c.Column == column)
+            .OrderBy(x => x.Row)
+            .ToList();
     }
 
     public List<Cell> GetBox(int row, int column)
@@ -79,7 +83,7 @@ public class Grid(List<Cell> cells)
         return Cells;
     }
 
-    public string PrintGrid()
+    public override string ToString()
     {
         var sb = new StringBuilder();
 
@@ -114,7 +118,6 @@ public class Grid(List<Cell> cells)
         return sb.ToString();
     }
 
-
     public override bool Equals(object? obj)
     {
         var referenceGrid = (Grid)obj!;
@@ -129,7 +132,7 @@ public class Grid(List<Cell> cells)
             {
                 continue;
             }
-            
+
             // Check if the cell values are equal
             if (myCell.Value != referenceCell.Value)
             {
@@ -144,5 +147,10 @@ public class Grid(List<Cell> cells)
         }
 
         return true;
+    }
+
+    public IEnumerable<Cell> GetSolvedCells()
+    {
+        return Cells.Where(x => x.IsSolved);
     }
 }

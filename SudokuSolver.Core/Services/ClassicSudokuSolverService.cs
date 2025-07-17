@@ -10,11 +10,11 @@ namespace SudokuSolver.Core.Services;
 public class ClassicSudokuSolverService(Grid grid) : AbstractSudokuSolverService
 {
     public override Grid MyGrid { get; set; } = grid;
-    public override List<Constrain> Constrains { get; init; } =
+    public override List<Constraint> Constrains { get; init; } =
     [
-        new RowConstrain(),
-        new ColumnConstrain(),
-        new BoxConstrain()
+        new RowConstraint(),
+        new ColumnConstraint(),
+        new BoxConstraint()
     ];
     
     private int MaxUnchangedIterations { get; init; } = 5;
@@ -35,36 +35,46 @@ public class ClassicSudokuSolverService(Grid grid) : AbstractSudokuSolverService
 
         var unchangedIterations = 0;
 
-        while (!MyGrid.IsSolved())
+        try
         {
-            var previousGrid = MyGrid.Clone(); // Assuming Grid has a Clone method
-
-            foreach (var constrain in Constrains)
+            while (!MyGrid.IsSolved())
             {
-                foreach (var referenceCell in MyGrid.GetAllUnsolvedCells())
+                var previousGrid = MyGrid.Clone(); // Assuming Grid has a Clone method
+
+                foreach (var constrain in Constrains)
                 {
-                    MyGrid = constrain.TrySolve(MyGrid, referenceCell.Row, referenceCell.Column);
+                    foreach (var referenceCell in MyGrid.GetAllUnsolvedCells())
+                    {
+                        MyGrid = constrain.TrySolve(MyGrid, referenceCell.Row, referenceCell.Column);
+                    }
+                    MyGrid.Obeys(constrain);
+                }
+            
+                foreach (var strategy in Strategies)
+                {
+                    MyGrid = strategy.Solve(MyGrid);
+                }
+
+                if (Equals(MyGrid.GetAllUnsolvedCells().Count(),
+                        previousGrid.GetAllUnsolvedCells().Count()))
+                {
+                    unchangedIterations++;
+                }
+                else
+                {
+                    unchangedIterations = 0;
+                }
+            
+                if (unchangedIterations >= MaxUnchangedIterations)
+                {
+                    break;
                 }
             }
-            
-            foreach (var strategy in Strategies)
-            {
-                MyGrid = strategy.Solve(MyGrid);
-            }
-
-            if (Equals(MyGrid.GetAllUnsolvedCells().Count(), previousGrid.GetAllUnsolvedCells().Count()))
-            {
-                unchangedIterations++;
-            }
-            else
-            {
-                unchangedIterations = 0;
-            }
-            
-            if (unchangedIterations >= MaxUnchangedIterations)
-            {
-                break;
-            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
         }
 
         return MyGrid;

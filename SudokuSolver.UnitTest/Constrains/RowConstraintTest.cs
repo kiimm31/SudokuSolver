@@ -6,14 +6,14 @@ using SudokuSolver.UnitTest.Base;
 
 namespace SudokuSolver.UnitTest.Constrains;
 
-public class RowConstrainTest : BaseTest
+public class RowConstraintTest : BaseTest
 {
-    private Constrain _rowConstrain;
+    private Constraint _rowConstraint;
 
     [SetUp]
     public void Setup()
     {
-        _rowConstrain = new RowConstrain();
+        _rowConstraint = new RowConstraint();
         
     }
 
@@ -33,7 +33,7 @@ public class RowConstrainTest : BaseTest
             new Cell { Row = 1, Column = 9 } // This cell is empty
         });
         
-        var result = _rowConstrain.TrySolve(grid, 1,9);
+        var result = _rowConstraint.TrySolve(grid, 1,9);
         
         result.GetCell(1, 9).Value.Should().Be(9);
         result.GetCell(1, 9).IsSolved.Should().BeTrue();

@@ -12,15 +12,17 @@ public class ClassicSolverTest : BaseTest
     {
         var gridRaw = new int[9, 9]
         {
-            { 5, 6, 0, 0, 8, 0, 0, 0, 0 },
-            { 0, 4, 8, 0, 0, 0, 0, 0, 6 },
-            { 0, 0, 0, 0, 6, 4, 0, 2, 0 },
-            { 9, 0, 0, 1, 0, 0, 6, 0, 2 },
-            { 4, 0, 6, 0, 0, 3, 0, 0, 1 },
-            { 0, 1, 0, 5, 9, 6, 0, 3, 0 },
-            { 3, 0, 0, 0, 0, 0, 0, 6, 0 },
-            { 0, 7, 0, 6, 0, 0, 0, 0, 5 },
-            { 6, 0, 0, 0, 3, 9, 0, 0, 0 }
+            { 5, 6, 0,/**/ 0, 8, 0,/**/ 0, 0, 0 },
+            { 0, 4, 8,/**/ 0, 0, 0,/**/ 0, 0, 6 },
+            { 0, 0, 0,/**/ 0, 6, 4,/**/ 0, 2, 0 },
+            /*--------------------------*/
+            { 9, 0, 0,/**/ 1, 0, 0,/**/ 6, 0, 2 },
+            { 4, 0, 6,/**/ 0, 0, 3,/**/ 0, 0, 1 },
+            { 0, 1, 0,/**/ 5, 9, 6,/**/ 0, 3, 0 },
+            /*--------------------------*/
+            { 3, 0, 0,/**/ 0, 0, 0,/**/ 0, 6, 0 },
+            { 0, 7, 0,/**/ 6, 0, 0,/**/ 0, 0, 5 },
+            { 6, 0, 0,/**/ 0, 3, 9,/**/ 0, 0, 0 }
         };
 
         // Convert the raw grid to a Grid object
@@ -31,7 +33,7 @@ public class ClassicSolverTest : BaseTest
         // Test that the solver can solve this easy puzzle
         var result = solverService.Solve();
 
-        Console.Write(result.PrintGrid());
+        Console.Write(result.ToString());
 
         result.IsSolved().Should().BeTrue();
     }
@@ -54,7 +56,7 @@ public class ClassicSolverTest : BaseTest
 
         var grid = GenerateGrid(gridRaw);
 
-        var printGrid = grid.PrintGrid();
+        var printGrid = grid.ToString();
 
         printGrid.Should().NotBeNullOrEmpty();
 

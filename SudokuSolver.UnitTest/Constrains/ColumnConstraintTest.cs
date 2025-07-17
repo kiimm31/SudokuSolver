@@ -6,15 +6,15 @@ using SudokuSolver.UnitTest.Base;
 
 namespace SudokuSolver.UnitTest.Constrains;
 
-public class ColumnConstrainTest : BaseTest
+public class ColumnConstraintTest : BaseTest
 {
-    private Constrain _columnConstrain;
+    private Constraint _columnConstraint;
 
     [SetUp]
     public void Setup()
     {
         // Initialize any required objects or state before each test
-        _columnConstrain = new ColumnConstrain();
+        _columnConstraint = new ColumnConstraint();
     }
 
     [Test]
@@ -33,7 +33,7 @@ public class ColumnConstrainTest : BaseTest
             new Cell { Row = 9, Column = 1 } // This cell is empty
         });
         
-        var result = _columnConstrain.TrySolve(grid, 9, 1);
+        var result = _columnConstraint.TrySolve(grid, 9, 1);
         result.GetCell(9, 1).Value.Should().Be(9);
         result.GetCell(9, 1).IsSolved.Should().BeTrue();
         result.GetCell(9, 1).IsConfirmed.Should().BeTrue();
