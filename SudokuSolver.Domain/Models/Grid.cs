@@ -153,4 +153,23 @@ public class Grid(List<Cell> cells)
     {
         return Cells.Where(x => x.IsSolved);
     }
+    
+    /// <summary>
+    /// Checks if the grid is completely solved
+    /// </summary>
+    /// <returns>True if all cells are solved, false otherwise</returns>
+    public bool IsSolved()
+    {
+        return Cells.All(c => c.IsSolved);
+    }
+    
+    /// <summary>
+    /// Creates a deep copy of the grid
+    /// </summary>
+    /// <returns>A new grid with the same cell values and possible values</returns>
+    public Grid Clone()
+    {
+        var clonedCells = Cells.Select(c => c.Clone()).ToList();
+        return new Grid(clonedCells);
+    }
 }

@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using SudokuSolver.Core.Services;
+using SudokuSolver.Core.Factories;
 using SudokuSolver.Domain.Models;
 using System.Data;
+using SudokuSolver.Core.Services;
 
 namespace SudokuSolver.WebApp.Controllers;
 
@@ -57,8 +58,8 @@ public class SudokuController : ControllerBase
             }
 
             // Solve the puzzle
-            var solverService = new ClassicSudokuSolverService(grid);
-            var solvedGrid = await Task.Run(() => solverService.Solve());
+            var solver = SudokuSolverFactory.CreateClassicSolver(grid);
+            var solvedGrid = await Task.Run(() => solver.Solve());
 
             if (solvedGrid == null)
             {

@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-using SudokuSolver.Core.Constrains;
-using SudokuSolver.Domain;
+using SudokuSolver.Core.Constraints;
+using SudokuSolver.Core.Interfaces;
 using SudokuSolver.Domain.Models;
 using SudokuSolver.UnitTest.Base;
 
@@ -8,7 +8,7 @@ namespace SudokuSolver.UnitTest.Constrains;
 
 public class RowConstraintTest : BaseTest
 {
-    private Constraint _rowConstraint;
+    private IConstraint _rowConstraint;
 
     [SetUp]
     public void Setup()
@@ -33,7 +33,7 @@ public class RowConstraintTest : BaseTest
             new Cell { Row = 1, Column = 9 } // This cell is empty
         });
         
-        var result = _rowConstraint.TrySolve(grid, 1,9);
+        var result = _rowConstraint.Apply(grid, 1,9);
         
         result.GetCell(1, 9)!.Value.Should().Be(9);
         result.GetCell(1, 9)!.IsSolved.Should().BeTrue();

@@ -1,17 +1,22 @@
-using SudokuSolver.Core.Interface;
+using SudokuSolver.Core.Base;
 using SudokuSolver.Domain.Models;
 
 namespace SudokuSolver.Core.Strategies;
 
-public class HiddenSinglesStrategy : Strategy
+/// <summary>
+/// Strategy that finds hidden singles - cells that are the only ones in a group that can contain a specific value
+/// </summary>
+public class HiddenSinglesStrategy : BaseSolvingStrategy
 {
     public override string Name => "Hidden Singles Strategy";
-    protected override void DoWork(List<Cell> targetGroup)
+    public override int Priority => 1;
+    
+    protected override void ApplyToGroup(List<Cell> targetGroup)
     {
-        foreach (var candidates in PossibleValues)    
+        foreach (var candidate in PossibleValues)
         {
             var candidateCells = targetGroup
-                .Where(cell => cell.GetPossibleValues().Contains(candidates))
+                .Where(cell => cell.GetPossibleValues().Contains(candidate))
                 .ToList();
 
             if (candidateCells.Count == 1)
@@ -23,9 +28,9 @@ public class HiddenSinglesStrategy : Strategy
                 {
                     // Check if this value is already used in the target group
                     var usedValues = targetGroup.Where(c => c.IsSolved).Select(c => c.Value).ToList();
-                    if (!usedValues.Contains(candidates))
+                    if (!usedValues.Contains(candidate))
                     {
-                        targetCell.SetValue(candidates);
+                        targetCell.SetValue(candidate);
                     }
                 }
             }

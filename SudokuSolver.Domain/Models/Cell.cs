@@ -51,4 +51,24 @@ public class Cell
 
         return startRow + startColumn;
     }
+    
+    /// <summary>
+    /// Creates a deep copy of this cell
+    /// </summary>
+    /// <returns>A new cell with the same properties</returns>
+    public Cell Clone()
+    {
+        var clonedCell = new Cell
+        {
+            Row = this.Row,
+            Column = this.Column,
+            Value = this.Value
+        };
+        
+        // Copy possible values
+        clonedCell.PossibleValues.Clear();
+        clonedCell.PossibleValues.AddRange(this.PossibleValues);
+        
+        return clonedCell;
+    }
 }

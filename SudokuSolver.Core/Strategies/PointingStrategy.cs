@@ -1,22 +1,25 @@
 using System.Runtime.CompilerServices;
-using SudokuSolver.Core.Interface;
+using SudokuSolver.Core.Base;
 using SudokuSolver.Domain.Models;
 
 [assembly: InternalsVisibleTo("SudokuSolver.UnitTest")]
 namespace SudokuSolver.Core.Strategies;
 
-public class PointingStrategy : Strategy
+/// <summary>
+/// Strategy that finds pointing pairs/triples - when candidates in a box are restricted to one row or column
+/// </summary>
+public class PointingStrategy : BaseSolvingStrategy
 {
     public override string Name => "Pointing Strategy";
+    public override int Priority => 3;
 
-    protected override void DoWork(List<Cell> targetGroup)
+    protected override void ApplyToGroup(List<Cell> targetGroup)
     {
-        // This method is not used in PointingStrategy, as the logic is handled in Solve method
-        // It can be left empty or throw an exception if called
-        throw new NotImplementedException("PointingStrategy does not use DoWork method.");
+        // This strategy works on boxes, so we need to override the Apply method
+        // The ApplyToGroup method is not used for this strategy
     }
-
-    public override Grid Solve(Grid grid)
+    
+    public override Grid Apply(Grid grid)
     {
         // Iterate through each box in the grid
         var boxGroup = grid.GetAllUnsolvedCells().GroupBy(x => x.GetBoxIndex());
@@ -48,16 +51,16 @@ public class PointingStrategy : Strategy
 
     private static void EliminateCandidateFromColumn(Grid grid, Dictionary<int, List<int>> columnDictionary, int boxNo)
     {
-        // Check rows for candidates that can be eliminated
-        // is there a candidate that only appears in one row of the box?
+        // Check columns for candidates that can be eliminated
+        // is there a candidate that only appears in one column of the box?
         foreach (var (candidate, columnList) in columnDictionary)
         {
             if (columnList.Count != 1) 
                 continue; 
-            // Only one row contains this candidate
+            // Only one column contains this candidate
             var column = columnList[0];
 
-            // Eliminate the candidate from all other cells in the row
+            // Eliminate the candidate from all other cells in the column
             foreach (var cell in grid.GetColumn(column).Where(c =>
                          c.GetPossibleValues().Contains(candidate)
                          && c.GetBoxIndex() != boxNo))

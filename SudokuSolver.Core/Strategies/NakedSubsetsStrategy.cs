@@ -1,14 +1,18 @@
+using SudokuSolver.Core.Base;
 using SudokuSolver.Core.Helpers;
-using SudokuSolver.Core.Interface;
 using SudokuSolver.Domain.Models;
 
 namespace SudokuSolver.Core.Strategies;
 
-public class NakedSubsetsStrategy : Strategy
+/// <summary>
+/// Strategy that finds naked subsets (pairs, triples, quads) and eliminates their candidates from other cells
+/// </summary>
+public class NakedSubsetsStrategy : BaseSolvingStrategy
 {
     public override string Name => "Naked Subsets Strategy";
+    public override int Priority => 2;
 
-    protected override void DoWork(List<Cell> targetGroup)
+    protected override void ApplyToGroup(List<Cell> targetGroup)
     {
         var unsolvedCells = targetGroup.Where(c => !c.IsSolved).ToList();
         

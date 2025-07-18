@@ -1,5 +1,4 @@
 using FluentAssertions;
-using SudokuSolver.Core.Interface;
 using SudokuSolver.Core.Strategies;
 using SudokuSolver.Domain.Models;
 using SudokuSolver.UnitTest.Base;

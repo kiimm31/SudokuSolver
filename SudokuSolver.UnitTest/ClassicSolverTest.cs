@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
-using SudokuSolver.Core.Helpers;
-using SudokuSolver.Core.Services;
+using SudokuSolver.Core.Factories;
 using SudokuSolver.UnitTest.Base;
 
 namespace SudokuSolver.UnitTest;
@@ -28,10 +27,10 @@ public class ClassicSolverTest : BaseTest
         // Convert the raw grid to a Grid object
         var grid = GenerateGrid(gridRaw);
 
-        var solverService = new ClassicSudokuSolverService(grid);
+        var solver = SudokuSolverFactory.CreateClassicSolver(grid);
 
         // Test that the solver can solve this easy puzzle
-        var result = solverService.Solve();
+        var result = solver.Solve();
 
         Console.Write(result.ToString());
 
@@ -83,9 +82,9 @@ public class ClassicSolverTest : BaseTest
 
         var grid = GenerateGrid(gridRaw);
 
-        var solverService = new ClassicSudokuSolverService(grid);
+        var solver = SudokuSolverFactory.CreateClassicSolver(grid);
         
-        var result = solverService.Solve();
+        var result = solver.Solve();
 
         result.IsSolved().Should().BeFalse();
     }

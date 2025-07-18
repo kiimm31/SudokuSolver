@@ -28,7 +28,7 @@ public class NakedSubsetsStrategyTest : BaseTest
 
         var grid = new Grid(rowCells);
 
-        var result = _pairStrategy.Solve(grid).GetRow(1);
+        var result = _pairStrategy.Apply(grid).GetRow(1);
 
         result.Should().BeEquivalentTo([
             GenerateCellWithPossibleValues(1, 1, [1, 2]),
@@ -50,7 +50,7 @@ public class NakedSubsetsStrategyTest : BaseTest
 
         var grid = new Grid(columnCells);
 
-        var result = _pairStrategy.Solve(grid).GetColumn(1);
+        var result = _pairStrategy.Apply(grid).GetColumn(1);
 
         result.Should().BeEquivalentTo([
             GenerateCellWithPossibleValues(1, 1, [1, 2]),
@@ -72,7 +72,7 @@ public class NakedSubsetsStrategyTest : BaseTest
 
         var grid = new Grid(boxCells);
 
-        var result = _pairStrategy.Solve(grid).GetBox(1, 1);
+        var result = _pairStrategy.Apply(grid).GetBox(1, 1);
 
         result.Should().BeEquivalentTo([
             GenerateCellWithPossibleValues(1, 1, [1, 2]),

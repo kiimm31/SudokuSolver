@@ -25,7 +25,7 @@ public class HiddenSinglesTest : BaseTest
         
         var grid = new Grid(cells);
 
-        var solve = new HiddenSinglesStrategy().Solve(grid);
+        var solve = new HiddenSinglesStrategy().Apply(grid);
         var cell = solve.GetCell(1, 1)!;
         cell.IsConfirmed.Should().BeTrue();
         cell.IsSolved.Should().BeTrue();

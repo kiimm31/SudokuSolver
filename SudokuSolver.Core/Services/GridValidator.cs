@@ -1,13 +1,13 @@
 using System.Data;
-using SudokuSolver.Core.Constrains;
+using SudokuSolver.Core.Constraints;
+using SudokuSolver.Core.Interfaces;
 using SudokuSolver.Domain.Models;
-using Constraint = SudokuSolver.Domain.Constraint;
 
 namespace SudokuSolver.Core.Services;
 
 public static class GridValidator
 {
-    private static readonly List<Constraint> Constrains =
+    private static readonly List<IConstraint> Constraints =
     [
         new RowConstraint(),
         new ColumnConstraint(),
@@ -16,7 +16,7 @@ public static class GridValidator
 
     public static bool ObeysAllConstraint(this Grid grid)
     {
-        foreach (var constraint in Constrains)
+        foreach (var constraint in Constraints)
         {
             grid.Obeys(constraint);
         }
@@ -24,11 +24,11 @@ public static class GridValidator
         return true;
     }
 
-    public static void Obeys(this Grid grid, Constraint constraint)
+    public static void Obeys(this Grid grid, IConstraint constraint)
     {
         foreach (var cell in grid.GetSolvedCells())
         {
-            if (!constraint.ObeysConstraint(grid, cell.Row, cell.Column))
+            if (!constraint.IsSatisfied(grid, cell.Row, cell.Column))
             {
                 throw new InvalidConstraintException(
                     $"Grid is invalid due to {constraint.Name} violation at cell ({cell.Row}, {cell.Column}).\n{grid}");
