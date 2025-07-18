@@ -19,9 +19,12 @@ public class Cell
 
     public void EliminatePossibleValue(int value)
     {
+        if (IsSolved)
+            return;
+            
         PossibleValues.Remove(value);
 
-        if (IsConfirmed)
+        if (IsConfirmed && !IsSolved)
         {
             SetValue(PossibleValues[0]);
         }

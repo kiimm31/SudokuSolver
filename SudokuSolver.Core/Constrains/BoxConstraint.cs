@@ -15,6 +15,6 @@ public class BoxConstraint : Constraint
 
     public override string ToResult(Grid grid, int referenceRow, int referenceColumn)
     {
-        return grid.GetColumn(referenceColumn).ToColumn();
+        return grid.GetBox(referenceRow, referenceColumn).ToBox();
     }
 }

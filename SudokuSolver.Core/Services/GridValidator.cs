@@ -30,7 +30,6 @@ public static class GridValidator
         {
             if (!constraint.ObeysConstraint(grid, cell.Row, cell.Column))
             {
-                Console.WriteLine(constraint.ToResult(grid, cell.Row, cell.Column));
                 throw new InvalidConstraintException(
                     $"Grid is invalid due to {constraint.Name} violation at cell ({cell.Row}, {cell.Column}).\n{grid}");
             }

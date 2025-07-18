@@ -17,7 +17,17 @@ public class HiddenSinglesStrategy : Strategy
             if (candidateCells.Count == 1)
             {
                 var targetCell = candidateCells[0];
-                targetCell.SetValue(candidates);
+                
+                // Only set the value if the cell is not already solved
+                if (!targetCell.IsSolved)
+                {
+                    // Check if this value is already used in the target group
+                    var usedValues = targetGroup.Where(c => c.IsSolved).Select(c => c.Value).ToList();
+                    if (!usedValues.Contains(candidates))
+                    {
+                        targetCell.SetValue(candidates);
+                    }
+                }
             }
         }
     }
