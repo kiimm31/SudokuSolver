@@ -29,7 +29,10 @@ public static class SudokuSolverFactory
         {
             new HiddenSinglesStrategy(),
             new NakedSubsetsStrategy(),
-            new PointingStrategy()
+            new PointingStrategy(),
+            new XWingStrategy(),
+            new SwordfishStrategy(),
+            new XYWingStrategy()
         };
         
         return new ClassicSudokuSolver(grid, constraints, strategies);
