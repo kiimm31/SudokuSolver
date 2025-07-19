@@ -34,9 +34,9 @@ public class XWingStrategy : BaseSolvingStrategy
         foreach (var candidate in PossibleValues)
         {
             // For each candidate, check all possible row pairs
-            for (int row1 = 1; row1 <= 8; row1++)
+            for (var row1 = 1; row1 <= 8; row1++)
             {
-                for (int row2 = row1 + 1; row2 <= 9; row2++)
+                for (var row2 = row1 + 1; row2 <= 9; row2++)
                 {
                     var row1Cells = grid.GetRow(row1).Where(c => c.GetPossibleValues().Contains(candidate)).ToList();
                     var row2Cells = grid.GetRow(row2).Where(c => c.GetPossibleValues().Contains(candidate)).ToList();
@@ -53,16 +53,14 @@ public class XWingStrategy : BaseSolvingStrategy
                         if (row1Columns.SequenceEqual(row2Columns))
                         {
                             // Eliminate the candidate from other cells in these columns
-                            foreach (var col in row1Columns)
+                            foreach (var cell in from col in row1Columns
+                                     select grid.GetColumn(col) into columnCells
+                                     from cell in columnCells
+                                     where cell.Row != row1 && cell.Row != row2 &&
+                                           cell.GetPossibleValues().Contains(candidate) 
+                                     select cell)
                             {
-                                var columnCells = grid.GetColumn(col);
-                                foreach (var cell in columnCells)
-                                {
-                                    if (cell.Row != row1 && cell.Row != row2 && cell.GetPossibleValues().Contains(candidate))
-                                    {
-                                        cell.EliminatePossibleValue(candidate);
-                                    }
-                                }
+                                cell.EliminatePossibleValue(candidate);
                             }
                         }
                     }
@@ -76,9 +74,9 @@ public class XWingStrategy : BaseSolvingStrategy
         foreach (var candidate in PossibleValues)
         {
             // For each candidate, check all possible column pairs
-            for (int col1 = 1; col1 <= 8; col1++)
+            for (var col1 = 1; col1 <= 8; col1++)
             {
-                for (int col2 = col1 + 1; col2 <= 9; col2++)
+                for (var col2 = col1 + 1; col2 <= 9; col2++)
                 {
                     var col1Cells = grid.GetColumn(col1).Where(c => c.GetPossibleValues().Contains(candidate)).ToList();
                     var col2Cells = grid.GetColumn(col2).Where(c => c.GetPossibleValues().Contains(candidate)).ToList();
@@ -93,16 +91,15 @@ public class XWingStrategy : BaseSolvingStrategy
                         if (col1Rows.SequenceEqual(col2Rows))
                         {
                             // Eliminate the candidate from other cells in these rows
-                            foreach (var row in col1Rows)
+                            foreach (var cell in from row in col1Rows 
+                                     select grid.GetRow(row) into rowCells
+                                     from cell in rowCells
+                                     where cell.Column != col1 &&
+                                           cell.Column != col2 &&
+                                           cell.GetPossibleValues().Contains(candidate) 
+                                     select cell)
                             {
-                                var rowCells = grid.GetRow(row);
-                                foreach (var cell in rowCells)
-                                {
-                                    if (cell.Column != col1 && cell.Column != col2 && cell.GetPossibleValues().Contains(candidate))
-                                    {
-                                        cell.EliminatePossibleValue(candidate);
-                                    }
-                                }
+                                cell.EliminatePossibleValue(candidate);
                             }
                         }
                     }

@@ -20,10 +20,10 @@ public class SwordfishStrategy : BaseSolvingStrategy
     
     public override Grid Apply(Grid grid)
     {
-        // Check for Swordfish patterns in rows (candidate appears in exactly 3 columns)
+        // Check for Swordfish patterns in rows (the candidate appears in exactly 3 columns)
         FindSwordfishInRows(grid);
         
-        // Check for Swordfish patterns in columns (candidate appears in exactly 3 rows)
+        // Check for Swordfish patterns in columns (the candidate appears in exactly 3 rows)
         FindSwordfishInColumns(grid);
         
         return grid;
@@ -34,11 +34,11 @@ public class SwordfishStrategy : BaseSolvingStrategy
         foreach (var candidate in PossibleValues)
         {
             // For each candidate, check all possible row triplets
-            for (int row1 = 1; row1 <= 7; row1++)
+            for (var row1 = 1; row1 <= 7; row1++)
             {
-                for (int row2 = row1 + 1; row2 <= 8; row2++)
+                for (var row2 = row1 + 1; row2 <= 8; row2++)
                 {
-                    for (int row3 = row2 + 1; row3 <= 9; row3++)
+                    for (var row3 = row2 + 1; row3 <= 9; row3++)
                     {
                         var row1Cells = grid.GetRow(row1).Where(c => c.GetPossibleValues().Contains(candidate)).ToList();
                         var row2Cells = grid.GetRow(row2).Where(c => c.GetPossibleValues().Contains(candidate)).ToList();
@@ -57,16 +57,15 @@ public class SwordfishStrategy : BaseSolvingStrategy
                             if (row1Columns.SequenceEqual(row2Columns) && row2Columns.SequenceEqual(row3Columns))
                             {
                                 // Eliminate the candidate from other cells in these columns
-                                foreach (var col in row1Columns)
+                                foreach (var cell in row1Columns.Select(grid.GetColumn)
+                                             .SelectMany(columnCells => columnCells,
+                                                 (columnCells, cell) => new { columnCells, cell })
+                                             .Where(c =>
+                                                 c.cell.Row != row1 && c.cell.Row != row2 && c.cell.Row != row3 &&
+                                                 c.cell.GetPossibleValues().Contains(candidate))
+                                             .Select(@t => @t.cell))
                                 {
-                                    var columnCells = grid.GetColumn(col);
-                                    foreach (var cell in columnCells)
-                                    {
-                                        if (cell.Row != row1 && cell.Row != row2 && cell.Row != row3 && cell.GetPossibleValues().Contains(candidate))
-                                        {
-                                            cell.EliminatePossibleValue(candidate);
-                                        }
-                                    }
+                                    cell.EliminatePossibleValue(candidate);
                                 }
                             }
                         }
@@ -81,11 +80,11 @@ public class SwordfishStrategy : BaseSolvingStrategy
         foreach (var candidate in PossibleValues)
         {
             // For each candidate, check all possible column triplets
-            for (int col1 = 1; col1 <= 7; col1++)
+            for (var col1 = 1; col1 <= 7; col1++)
             {
-                for (int col2 = col1 + 1; col2 <= 8; col2++)
+                for (var col2 = col1 + 1; col2 <= 8; col2++)
                 {
-                    for (int col3 = col2 + 1; col3 <= 9; col3++)
+                    for (var col3 = col2 + 1; col3 <= 9; col3++)
                     {
                         var col1Cells = grid.GetColumn(col1).Where(c => c.GetPossibleValues().Contains(candidate)).ToList();
                         var col2Cells = grid.GetColumn(col2).Where(c => c.GetPossibleValues().Contains(candidate)).ToList();
@@ -102,16 +101,16 @@ public class SwordfishStrategy : BaseSolvingStrategy
                             if (col1Rows.SequenceEqual(col2Rows) && col2Rows.SequenceEqual(col3Rows))
                             {
                                 // Eliminate the candidate from other cells in these rows
-                                foreach (var row in col1Rows)
+                                foreach (var cell in col1Rows.Select(grid.GetRow)
+                                             .SelectMany(rowCells => rowCells,
+                                                 (rowCells, cell) => new { rowCells, cell })
+                                             .Where(c =>
+                                                 c.cell.Column != col1 && c.cell.Column != col2 &&
+                                                 c.cell.Column != col3 &&
+                                                 c.cell.GetPossibleValues().Contains(candidate))
+                                             .Select(@t => @t.cell))
                                 {
-                                    var rowCells = grid.GetRow(row);
-                                    foreach (var cell in rowCells)
-                                    {
-                                        if (cell.Column != col1 && cell.Column != col2 && cell.Column != col3 && cell.GetPossibleValues().Contains(candidate))
-                                        {
-                                            cell.EliminatePossibleValue(candidate);
-                                        }
-                                    }
+                                    cell.EliminatePossibleValue(candidate);
                                 }
                             }
                         }
