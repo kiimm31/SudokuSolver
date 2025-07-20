@@ -144,6 +144,57 @@ public class SudokuController : ControllerBase
             return StatusCode(500, new { error = "An error occurred while validating the puzzle." });
         }
     }
+
+    [HttpPost("generate")]
+    public async Task<IActionResult> Generate([FromBody] GenerateRequest request)
+    {
+        try
+        {
+            // Validate difficulty level
+            var validDifficulties = new[] { "easy", "medium", "hard", "expert" };
+            if (!validDifficulties.Contains(request.Difficulty?.ToLower()))
+            {
+                return BadRequest(new { error = "Invalid difficulty. Must be: easy, medium, hard, or expert." });
+            }
+
+            // Generate puzzle based on difficulty
+            var puzzle = await Task.Run(() => GeneratePuzzle(request.Difficulty));
+
+            return Ok(new GenerateResponse
+            {
+                Grid = puzzle,
+                Difficulty = request.Difficulty,
+                Message = $"Generated {request.Difficulty} puzzle"
+            });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error generating Sudoku puzzle");
+            return StatusCode(500, new { error = "An error occurred while generating the puzzle." });
+        }
+    }
+
+    private int[] GeneratePuzzle(string difficulty)
+    {
+        // This is a placeholder implementation
+        // You'll need to implement actual puzzle generation logic
+        var random = new Random();
+        var grid = new int[81];
+        
+        // Generate a solved grid first (you can use your solver with an empty grid)
+        // Then remove numbers based on difficulty
+        int cellsToRemove = difficulty.ToLower() switch
+        {
+            "easy" => 30,
+            "medium" => 40,
+            "hard" => 50,
+            "expert" => 60,
+            _ => 40
+        };
+
+        // For now, return a simple example puzzle
+        return grid;
+    }
 }
 
 public class SolveRequest
@@ -165,4 +216,16 @@ public class ValidateRequest
 public class ValidateResponse
 {
     public bool IsValid { get; set; }
+} 
+
+public class GenerateRequest
+{
+    public string Difficulty { get; set; } = "medium";
+}
+
+public class GenerateResponse
+{
+    public int[] Grid { get; set; } = Array.Empty<int>();
+    public string Difficulty { get; set; } = string.Empty;
+    public string Message { get; set; } = string.Empty;
 } 

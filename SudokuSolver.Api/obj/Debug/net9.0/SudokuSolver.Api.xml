@@ -1,0 +1,492 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SudokuSolver.Api</name>
+    </assembly>
+    <members>
+        <member name="T:SudokuSolver.Api.Controllers.SudokuController">
+            <summary>
+            Controller for Sudoku solving, validation, and generation operations
+            </summary>
+        </member>
+        <member name="M:SudokuSolver.Api.Controllers.SudokuController.Solve(SudokuSolver.Api.Models.SolveSudokuRequest)">
+            <summary>
+            Solves a Sudoku puzzle
+            </summary>
+            <param name="request">The solve request containing the grid and options</param>
+            <returns>The solved grid or error if unsolvable</returns>
+        </member>
+        <member name="M:SudokuSolver.Api.Controllers.SudokuController.Validate(SudokuSolver.Api.Models.ValidateSudokuRequest)">
+            <summary>
+            Validates a Sudoku grid
+            </summary>
+            <param name="request">The validation request</param>
+            <returns>Validation results</returns>
+        </member>
+        <member name="M:SudokuSolver.Api.Controllers.SudokuController.Generate(SudokuSolver.Api.Models.GenerateSudokuRequest)">
+            <summary>
+            Generates a new Sudoku puzzle
+            </summary>
+            <param name="request">The generation request</param>
+            <returns>The generated puzzle and solution</returns>
+        </member>
+        <member name="M:SudokuSolver.Api.Controllers.SudokuController.GetHint(SudokuSolver.Api.Models.GetHintRequest)">
+            <summary>
+            Gets a hint for a specific cell
+            </summary>
+            <param name="request">The hint request</param>
+            <returns>The hint information</returns>
+        </member>
+        <member name="M:SudokuSolver.Api.Controllers.SudokuController.Health">
+            <summary>
+            Health check endpoint
+            </summary>
+            <returns>Health status</returns>
+        </member>
+        <member name="T:SudokuSolver.Api.Exceptions.SudokuException">
+            <summary>
+            Base exception for Sudoku-related errors
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Exceptions.UnsolvablePuzzleException">
+            <summary>
+            Exception thrown when a Sudoku puzzle is unsolvable
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Exceptions.InvalidGridException">
+            <summary>
+            Exception thrown when a Sudoku grid is invalid
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Exceptions.SolvingTimeoutException">
+            <summary>
+            Exception thrown when solving times out
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Exceptions.PuzzleGenerationException">
+            <summary>
+            Exception thrown when puzzle generation fails
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Exceptions.InvalidDifficultyException">
+            <summary>
+            Exception thrown when an invalid difficulty level is requested
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Exceptions.HintUnavailableException">
+            <summary>
+            Exception thrown when a hint cannot be provided
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Middleware.GlobalExceptionHandler">
+            <summary>
+            Global exception handling middleware
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Middleware.GlobalExceptionHandlerExtensions">
+            <summary>
+            Extension method to register the global exception handler
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Models.ApiResponse`1">
+            <summary>
+            Standardized API response wrapper for all endpoints
+            </summary>
+            <typeparam name="T">The type of data being returned</typeparam>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.ApiResponse`1.Success">
+            <summary>
+            Indicates whether the request was successful
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.ApiResponse`1.Data">
+            <summary>
+            The actual data payload
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.ApiResponse`1.Error">
+            <summary>
+            Error information if the request failed
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.ApiResponse`1.Timestamp">
+            <summary>
+            Timestamp of when the response was generated
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.ApiResponse`1.CorrelationId">
+            <summary>
+            Request correlation ID for tracking
+            </summary>
+        </member>
+        <member name="M:SudokuSolver.Api.Models.ApiResponse`1.SuccessResponse(`0,System.String)">
+            <summary>
+            Creates a successful response
+            </summary>
+        </member>
+        <member name="M:SudokuSolver.Api.Models.ApiResponse`1.ErrorResponse(System.String,System.String,System.String)">
+            <summary>
+            Creates an error response
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Models.ErrorResponse">
+            <summary>
+            Standardized error response format
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.ErrorResponse.Message">
+            <summary>
+            Human-readable error message
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.ErrorResponse.Code">
+            <summary>
+            Error code for programmatic handling
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.ErrorResponse.Details">
+            <summary>
+            Additional error details
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Models.SolveSudokuRequest">
+            <summary>
+            Request model for solving a Sudoku puzzle
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SolveSudokuRequest.Grid">
+            <summary>
+            The Sudoku grid to solve
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SolveSudokuRequest.TimeoutMs">
+            <summary>
+            Maximum time to spend solving in milliseconds (default: 30000)
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SolveSudokuRequest.IncludeSteps">
+            <summary>
+            Whether to include detailed solving steps
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Models.ValidateSudokuRequest">
+            <summary>
+            Request model for validating a Sudoku grid
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.ValidateSudokuRequest.Grid">
+            <summary>
+            The Sudoku grid to validate
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.ValidateSudokuRequest.CompleteValidation">
+            <summary>
+            Whether to perform complete validation (including solvability check)
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Models.GenerateSudokuRequest">
+            <summary>
+            Request model for generating a new Sudoku puzzle
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.GenerateSudokuRequest.Difficulty">
+            <summary>
+            The desired difficulty level
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.GenerateSudokuRequest.Size">
+            <summary>
+            The size of the Sudoku grid (default: 9)
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.GenerateSudokuRequest.IncludeSolution">
+            <summary>
+            Whether to include the solution in the response
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.GenerateSudokuRequest.TimeoutMs">
+            <summary>
+            Maximum time to spend generating in milliseconds (default: 10000)
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Models.GetHintRequest">
+            <summary>
+            Request model for getting solving hints
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.GetHintRequest.Grid">
+            <summary>
+            The current Sudoku grid state
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.GetHintRequest.Row">
+            <summary>
+            The row of the cell to get a hint for
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.GetHintRequest.Column">
+            <summary>
+            The column of the cell to get a hint for
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.GetHintRequest.HintType">
+            <summary>
+            The type of hint to provide
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Models.SudokuSolveResponse">
+            <summary>
+            Response model for Sudoku solve operations
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuSolveResponse.OriginalGrid">
+            <summary>
+            The original unsolved grid
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuSolveResponse.SolvedGrid">
+            <summary>
+            The solved grid (null if unsolvable)
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuSolveResponse.IsSolvable">
+            <summary>
+            Whether the puzzle was successfully solved
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuSolveResponse.SolveTimeMs">
+            <summary>
+            Time taken to solve in milliseconds
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuSolveResponse.StepsTaken">
+            <summary>
+            Number of solving steps taken
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuSolveResponse.StrategiesUsed">
+            <summary>
+            Solving strategies used
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuSolveResponse.Difficulty">
+            <summary>
+            Difficulty assessment of the puzzle
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuSolveResponse.Metadata">
+            <summary>
+            Additional solving metadata
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Models.SudokuValidationResponse">
+            <summary>
+            Response model for Sudoku validation operations
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuValidationResponse.IsValid">
+            <summary>
+            Whether the grid is valid
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuValidationResponse.Errors">
+            <summary>
+            List of validation errors found
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuValidationResponse.IsComplete">
+            <summary>
+            Whether the grid is complete (all cells filled)
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuValidationResponse.FilledCells">
+            <summary>
+            Number of filled cells
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuValidationResponse.EmptyCells">
+            <summary>
+            Number of empty cells
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Models.SudokuGenerationResponse">
+            <summary>
+            Response model for Sudoku generation operations
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuGenerationResponse.Puzzle">
+            <summary>
+            The generated puzzle grid
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuGenerationResponse.Solution">
+            <summary>
+            The complete solution grid
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuGenerationResponse.Difficulty">
+            <summary>
+            The requested difficulty level
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuGenerationResponse.GenerationTimeMs">
+            <summary>
+            Time taken to generate in milliseconds
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuGenerationResponse.ClueCount">
+            <summary>
+            Number of clues in the puzzle
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SudokuGenerationResponse.Metadata">
+            <summary>
+            Generation metadata
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Models.ValidationError">
+            <summary>
+            Validation error details
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.ValidationError.Type">
+            <summary>
+            Error type/category
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.ValidationError.Message">
+            <summary>
+            Error message
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.ValidationError.Position">
+            <summary>
+            Cell position where error occurred (if applicable)
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Models.CellPosition">
+            <summary>
+            Cell position information
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.CellPosition.Row">
+            <summary>
+            Row index (0-based)
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.CellPosition.Column">
+            <summary>
+            Column index (0-based)
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Models.SolvingMetadata">
+            <summary>
+            Solving metadata
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SolvingMetadata.MaxRecursionDepth">
+            <summary>
+            Maximum recursion depth reached
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SolvingMetadata.BacktrackCount">
+            <summary>
+            Number of backtracking operations
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.SolvingMetadata.MemoryUsageBytes">
+            <summary>
+            Memory usage in bytes
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Models.GenerationMetadata">
+            <summary>
+            Generation metadata
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.GenerationMetadata.Attempts">
+            <summary>
+            Number of attempts to generate a valid puzzle
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.GenerationMetadata.IsUnique">
+            <summary>
+            Whether the puzzle is unique
+            </summary>
+        </member>
+        <member name="P:SudokuSolver.Api.Models.GenerationMetadata.Symmetry">
+            <summary>
+            Symmetry type used in generation
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Services.PuzzleGenerationService">
+            <summary>
+            Service for generating Sudoku puzzles
+            </summary>
+        </member>
+        <member name="M:SudokuSolver.Api.Services.PuzzleGenerationService.GeneratePuzzleAsync(System.String,System.Int32)">
+            <summary>
+            Generates a new Sudoku puzzle with the specified difficulty
+            </summary>
+            <param name="difficulty">The desired difficulty level</param>
+            <param name="timeoutMs">Maximum time to spend generating</param>
+            <returns>The generated puzzle and solution</returns>
+        </member>
+        <member name="M:SudokuSolver.Api.Services.PuzzleGenerationService.GeneratePuzzleWithDifficulty(System.String)">
+            <summary>
+            Generates a puzzle with the specified difficulty level
+            </summary>
+        </member>
+        <member name="M:SudokuSolver.Api.Services.PuzzleGenerationService.GenerateCompleteGrid">
+            <summary>
+            Generates a complete, valid Sudoku grid
+            </summary>
+        </member>
+        <member name="M:SudokuSolver.Api.Services.PuzzleGenerationService.FillGridRecursively(SudokuSolver.Domain.Models.Grid,System.Int32)">
+            <summary>
+            Recursively fills the grid with valid values
+            </summary>
+        </member>
+        <member name="M:SudokuSolver.Api.Services.PuzzleGenerationService.IsValidPlacement(SudokuSolver.Domain.Models.Grid,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Checks if a number can be placed at the specified position
+            </summary>
+        </member>
+        <member name="M:SudokuSolver.Api.Services.PuzzleGenerationService.GetCellsToRemoveForDifficulty(System.String)">
+            <summary>
+            Gets the number of cells to remove based on difficulty
+            </summary>
+        </member>
+        <member name="M:SudokuSolver.Api.Services.PuzzleGenerationService.RemoveRandomCells(SudokuSolver.Domain.Models.Grid,System.Int32)">
+            <summary>
+            Removes random cells from the puzzle
+            </summary>
+        </member>
+        <member name="M:SudokuSolver.Api.Services.PuzzleGenerationService.VerifyPuzzleAsync(SudokuSolver.Domain.Models.Grid,SudokuSolver.Domain.Models.Grid)">
+            <summary>
+            Verifies that the puzzle is solvable and has a unique solution
+            </summary>
+        </member>
+        <member name="M:SudokuSolver.Api.Services.PuzzleGenerationService.GridsAreEqual(SudokuSolver.Domain.Models.Grid,SudokuSolver.Domain.Models.Grid)">
+            <summary>
+            Compares two grids for equality
+            </summary>
+        </member>
+        <member name="T:SudokuSolver.Api.Services.ISudokuSolverFactory">
+            <summary>
+            Factory for creating Sudoku solver instances
+            </summary>
+        </member>
+        <member name="M:SudokuSolver.Api.Services.ISudokuSolverFactory.CreateSolver">
+            <summary>
+            Creates a new ClassicSudokuSolver instance
+            </summary>
+            <returns>A configured ClassicSudokuSolver instance</returns>
+        </member>
+        <member name="T:SudokuSolver.Api.Services.SudokuSolverFactory">
+            <summary>
+            Implementation of SudokuSolverFactory
+            </summary>
+        </member>
+    </members>
+</doc>

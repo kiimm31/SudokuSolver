@@ -12,7 +12,7 @@ import {
 class SudokuAPI {
   private baseURL: string;
 
-  constructor(baseURL: string = '/api') {
+  constructor(baseURL: string = 'https://localhost:7001/api') {
     this.baseURL = baseURL;
   }
 

@@ -1,5 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# 
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuSolver.Core", "SudokuSolver.Core\SudokuSolver.Core.csproj", "{79365623-C454-4DE9-A084-0D330B0412C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuSolver.WebApp", "SudokuSolver.WebApp\SudokuSolver.WebApp.csproj", "{BBE8CEB6-FBF3-4352-92D4-D999A74A66EF}"
@@ -7,6 +8,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuSolver.Domain", "SudokuSolver.Domain\SudokuSolver.Domain.csproj", "{F4F54C4B-8114-4E29-A748-75AE9D6DD6B4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuSolver.UnitTest", "SudokuSolver.UnitTest\SudokuSolver.UnitTest.csproj", "{8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuSolver.Api", "SudokuSolver.Api\SudokuSolver.Api.csproj", "{490DD1A3-F9D0-49DD-AA98-3E20AD600D2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +33,9 @@ Global
 		{8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D799CF6-EDA5-4D35-90FB-C552F3DDC0CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{490DD1A3-F9D0-49DD-AA98-3E20AD600D2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{490DD1A3-F9D0-49DD-AA98-3E20AD600D2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{490DD1A3-F9D0-49DD-AA98-3E20AD600D2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{490DD1A3-F9D0-49DD-AA98-3E20AD600D2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
