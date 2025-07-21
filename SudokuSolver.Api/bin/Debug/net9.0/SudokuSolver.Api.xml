@@ -9,6 +9,11 @@
             Controller for Sudoku solving, validation, and generation operations
             </summary>
         </member>
+        <member name="M:SudokuSolver.Api.Controllers.SudokuController.#ctor(SudokuSolver.Api.Services.ISudokuSolverFactory,SudokuSolver.Api.Services.PuzzleGenerationService,Microsoft.Extensions.Logging.ILogger{SudokuSolver.Api.Controllers.SudokuController})">
+            <summary>
+            Controller for Sudoku solving, validation, and generation operations
+            </summary>
+        </member>
         <member name="M:SudokuSolver.Api.Controllers.SudokuController.Solve(SudokuSolver.Api.Models.SolveSudokuRequest)">
             <summary>
             Solves a Sudoku puzzle

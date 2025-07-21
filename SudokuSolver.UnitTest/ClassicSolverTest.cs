@@ -88,4 +88,51 @@ public class ClassicSolverTest : BaseTest
 
         result.IsSolved().Should().BeFalse();
     }
+
+    [Test]
+    public void ImageUploadPuzzle_ShouldSolve()
+    {
+        // Sudoku puzzle from the uploaded image
+        // Grid with light blue gradient background, dark blue numbers
+        var gridRaw = new int[9, 9]
+        {
+            { 0, 0, 0,/**/ 0, 7, 0,/**/ 0, 0, 3 },
+            { 5, 8, 0,/**/ 0, 3, 0,/**/ 0, 0, 0 },
+            { 0, 0, 2,/**/ 9, 0, 6,/**/ 8, 1, 0 },
+            /*--------------------------*/
+            { 0, 2, 0,/**/ 0, 5, 0,/**/ 0, 0, 0 },
+            { 3, 0, 6,/**/ 0, 0, 0,/**/ 4, 0, 5 },
+            { 0, 9, 0,/**/ 0, 0, 0,/**/ 0, 7, 0 },
+            /*--------------------------*/
+            { 0, 0, 0,/**/ 0, 6, 0,/**/ 0, 0, 1 },
+            { 0, 0, 0,/**/ 0, 0, 1,/**/ 7, 2, 4 },
+            { 0, 0, 0,/**/ 3, 0, 0,/**/ 0, 0, 0 }
+        };
+
+        // Convert the raw grid to a Grid object
+        var grid = GenerateGrid(gridRaw);
+
+        // Verify the puzzle is not solved initially
+        grid.IsSolved().Should().BeFalse();
+
+        var solver = SudokuSolverFactory.CreateClassicSolver(grid);
+
+        // Test that the solver can solve this puzzle
+        var result = solver.Solve();
+
+        Console.WriteLine("Original Puzzle:");
+        Console.WriteLine(grid.ToString());
+        Console.WriteLine();
+        Console.WriteLine("Solved Puzzle:");
+        Console.WriteLine(result.ToString());
+
+        // Verify the puzzle is solved
+        result.IsSolved().Should().BeTrue();
+
+        // Additional verification: check that all cells are filled (1-9)
+        var allCells = result.GetAllCells();
+        allCells.Should().NotBeNull();
+        allCells!.Count.Should().Be(81);
+        allCells.All(cell => cell.Value >= 1 && cell.Value <= 9).Should().BeTrue();
+    }
 }

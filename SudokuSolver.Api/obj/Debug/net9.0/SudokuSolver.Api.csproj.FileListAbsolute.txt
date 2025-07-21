@@ -41,3 +41,8 @@ C:\Users\kim31\Code\SudokuSolver\SudokuSolver.Api\obj\Debug\net9.0\SudokuSolver.
 C:\Users\kim31\Code\SudokuSolver\SudokuSolver.Api\obj\Debug\net9.0\SudokuSolver.Api.pdb
 C:\Users\kim31\Code\SudokuSolver\SudokuSolver.Api\obj\Debug\net9.0\SudokuSolver.Api.genruntimeconfig.cache
 C:\Users\kim31\Code\SudokuSolver\SudokuSolver.Api\obj\Debug\net9.0\ref\SudokuSolver.Api.dll
+C:\Users\kim31\Code\SudokuSolver\SudokuSolver.Api\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\kim31\Code\SudokuSolver\SudokuSolver.Api\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\kim31\Code\SudokuSolver\SudokuSolver.Api\bin\Debug\net9.0\SixLabors.Fonts.dll
+C:\Users\kim31\Code\SudokuSolver\SudokuSolver.Api\bin\Debug\net9.0\SixLabors.ImageSharp.dll
+C:\Users\kim31\Code\SudokuSolver\SudokuSolver.Api\bin\Debug\net9.0\SixLabors.ImageSharp.Drawing.dll

@@ -10,4 +10,18 @@
       <ProjectReference Include="..\SudokuSolver.Domain\SudokuSolver.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <!-- <PackageReference Include="TesseractOCR" Version="5.2.10" /> -->
+      <PackageReference Include="SixLabors.ImageSharp" Version="3.1.1" />
+      <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.0" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
+    </ItemGroup>
+
+    <!-- Exclude TesseractOCR native libraries from copying -->
+    <Target Name="ExcludeTesseractNativeLibs" BeforeTargets="CopyFilesToOutputDirectory">
+      <ItemGroup>
+        <FileWrites Remove="@(FileWrites)" Condition="'%(Filename)' == 'tesseract51'" />
+      </ItemGroup>
+    </Target>
+
 </Project>
