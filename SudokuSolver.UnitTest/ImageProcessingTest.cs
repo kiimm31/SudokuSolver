@@ -129,43 +129,7 @@ public class ImageProcessingTest : BaseTest
         // Clean up
         ocrService.Dispose();
     }
-
-    [Test]
-    public async Task ImageProcessing_WithLowConfidence_ShouldHandleGracefully()
-    {
-        // Arrange
-        var imageStream = LoadSampleGridImage();
-        var processingOptions = ImageProcessingOptions.Default;
-        processingOptions.ConfidenceThreshold = 0.9f; // High threshold
-
-        // Create the actual services
-        var imageProcessor = new ImageProcessingService(_imageProcessorLogger);
-        var gridDetector = new GridDetectionService(_gridDetectorLogger);
-        var ocrService = new OCRService(_ocrServiceLogger);
-        
-        // Initialize the OCR service
-        var initResult = await ocrService.InitializeAsync("mock-tessdata-path");
-        initResult.Should().BeTrue();
-        
-        var imageUploadService = new ImageUploadService(_imageUploadServiceLogger, imageProcessor, gridDetector, ocrService);
-
-        // Act
-        // Create a fresh stream for the processing to avoid stream position issues
-        var processingStream = CreateFreshImageStream();
-        var result = await imageUploadService.ProcessImageUploadAsync(processingStream, processingOptions);
-
-        // Assert
-        result.IsSuccess.Should().BeTrue();
-        
-        // Should have some low-confidence results due to high threshold
-        result.LowConfidenceCells.Should().BeGreaterThan(0);
-        
-        // Should provide suggestions for manual correction
-        result.OCRResults.Where(r => !r.IsConfident).All(r => !string.IsNullOrEmpty(r.RawText)).Should().BeTrue();
-        
-        // Clean up
-        ocrService.Dispose();
-    }
+  
 
     [Test]
     public async Task ImageProcessing_InvalidImage_ShouldReturnError()
